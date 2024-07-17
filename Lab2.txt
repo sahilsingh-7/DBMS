@@ -1,0 +1,71 @@
+CREATE TABLE Client_Master (
+    Client_No VARCHAR(6),
+    Name VARCHAR(20),
+    Address1 VARCHAR(30),
+    Address2 VARCHAR(30),
+    City VARCHAR(15),
+    State VARCHAR(15),
+    Pincode NUMBER(6),
+    Bal_Due FLOAT(10,2)
+);
+
+CREATE TABLE Product_Master (
+    Product_NO VARCHAR(6),
+    Description VARCHAR(20),
+    Profit_percentage NUMBER(6),
+    Unit_Measure VARCHAR(10),
+    Qty_On_Hand NUMBER(6),
+    Reorder_Lvl NUMBER(6),
+    Sell_Price FLOAT(7,2),
+    Cost_Price FLOAT(7,2)
+);
+
+ALTER TABLE Client_Master ADD DOB DATE;
+ALTER TABLE Client_Master MODIFY Client_No NUMBER;
+ALTER TABLE Client_Master DROP COLUMN DOB;
+ALTER TABLE Product_Master RENAME COLUMN Sell_Price TO SellPrice;
+ALTER TABLE Product_Master RENAME TO ProductMaster;
+
+DROP TABLE Client_Master;
+DROP TABLE ProductMaster;
+
+CREATE TABLE Client_Master (
+    Client_No VARCHAR(6),
+    Name VARCHAR(20),
+    City VARCHAR(15),
+    Pincode NUMBER(6),
+    State VARCHAR(15),
+    Bal_Due FLOAT(10,2)
+);
+
+INSERT INTO Client_Master (Client_No, Name, City, Pincode, State, Bal_Due) VALUES 
+('C00001', 'Ivan Bayross', 'Mumbai', 400054, 'Maharashtra', 15000),
+('C00002', 'Mamta Mazumdar', 'Madras', 780001, 'Tamil Nadu', 0),
+('C00003', 'Chhaya Bankar', 'Mumbai', 400057, 'Maharashtra', 5000),
+('C00004', 'Ashwini Joshi', 'Bangalore', 560001, 'Karnataka', 0),
+('C00005', 'Hansel Colaco', 'Mumbai', 400060, 'Maharashtra', 2000),
+('C00006', 'Deepak Sharma', 'Mangalore', 560050, 'Karnataka', 0);
+
+SELECT Name FROM Client_Master;
+
+SELECT * FROM Client_Master;
+
+SELECT Name, City, State FROM Client_Master;
+
+SELECT * FROM Client_Master WHERE City = 'Mumbai';
+
+SELECT Name FROM Client_Master WHERE Bal_Due = 15000;
+
+SELECT * FROM Client_Master WHERE Name LIKE 'M%';
+
+SELECT * FROM Client_Master WHERE State IN ('Maharashtra', 'Karnataka');
+
+UPDATE Client_Master SET City = 'Bangalore' WHERE Client_No = 'C00005';
+
+UPDATE Client_Master SET Bal_Due = 1000 WHERE Client_No = 'C00001';
+
+UPDATE Client_Master SET City = 'Pune';
+
+DELETE FROM Client_Master;
+
+DELETE FROM Client_Master WHERE State = 'Tamil Nadu';
