@@ -1,0 +1,110 @@
+CREATE TABLE Sample (
+    ID NUMBER,
+    Name VARCHAR2(50)
+);
+
+INSERT INTO Sample (ID, Name) VALUES (1, 'sumit');
+INSERT INTO Sample (ID, Name) VALUES (2, 'sagar');
+INSERT INTO Sample (ID, Name) VALUES (3, 'hasrh');
+
+SELECT UPPER(Name) FROM Sample;
+SELECT LOWER(Name) FROM Sample;
+SELECT INITCAP(Name) FROM Sample;
+SELECT LENGTH(Name) FROM Sample;
+SELECT SUBSTR(Name, 1, 4) FROM Sample;
+SELECT INSTR(Name, 'o') FROM Sample;
+SELECT LPAD(Name, 10, '*') FROM Sample;
+SELECT RPAD(Name, 10, '*') FROM Sample;
+SELECT TRIM('  sumit  ') FROM Sample;
+SELECT REPLACE(Name, 'sumit', 'harsh') FROM Sample;
+SELECT CONCAT('Hello, ', Name) FROM Sample;
+SELECT RTRIM('sumit   ') FROM Sample;
+SELECT LTRIM('   sumit') FROM Sample;
+
+CREATE TABLE Student (
+    Roll NUMBER,
+    F_Name VARCHAR2(20),
+    M_Name VARCHAR2(20),
+    L_Name VARCHAR2(20),
+    Sec CHAR(1),
+    City VARCHAR2(20),
+    Area VARCHAR2(50),
+    HouseNo VARCHAR2(10),
+    Div NUMBER
+);
+
+INSERT INTO Student (Roll, F_Name, M_Name, L_Name, Sec, City, Area, HouseNo, Div) VALUES
+(1, 'Akash', 'Kumar', 'Jian', 'A', 'Ghaziabad', 'Rakesh Marg', 'C-355', 1),
+(2, 'Manav', 'Mohan', 'Sharma', 'A', 'Ghaziabad', 'Raj nagar', 'D-211', 2),
+(3, 'Chandra', 'Mohan', 'Batra', 'B', 'Meerut', 'Minto Road', 'A-201', 3),
+(4, 'Rakesh', 'Chandra', 'Gupta', 'B', 'Kanpur', 'Nehru Marg', 'A-145', NULL),
+(5, 'Sagar', 'Pratap', 'Singh', 'A', 'Meerut', 'Gandhi marg', 'C-35', 0);
+
+SELECT Roll, F_Name || ' ' || M_Name || ' ' || L_Name AS Full_Name FROM Student;
+SELECT Roll, F_Name || ' ' || M_Name || ' ' || L_Name AS Name, City || ', ' || Area || ', ' || HouseNo AS Address FROM Student;
+SELECT Roll, SUBSTR(F_Name, 1, 1) || '.' || SUBSTR(M_Name, 1, 1) || '.' || L_Name AS Name FROM Student;
+SELECT * FROM Student ORDER BY Sec ASC;
+SELECT * FROM Student ORDER BY Sec DESC;
+SELECT * FROM Student ORDER BY Sec, F_Name;
+SELECT Roll, F_Name || ' ' || M_Name || ' ' || L_Name AS Name, LPAD(City, LENGTH(City) + 5, '*') AS City FROM Student;
+SELECT * FROM Student WHERE Div IS NULL;
+SELECT DISTINCT City FROM Student;
+SELECT Roll, F_Name, 
+    CASE 
+        WHEN Div = 1 THEN 'FIRST' 
+        WHEN Div = 2 THEN 'SECOND' 
+        WHEN Div = 3 THEN 'THIRD' 
+        WHEN Div = 0 THEN 'FAIL' 
+        ELSE 'NOT AWARDED' 
+    END AS Division
+FROM Student;
+SELECT Roll, F_Name, 
+    CASE 
+        WHEN Sec = 'A' THEN 1 
+        WHEN Sec = 'B' THEN 2 
+    END AS Section
+FROM Student;
+
+CREATE TABLE Employee (
+    Empcode VARCHAR2(5),
+    Empname VARCHAR2(50)
+);
+
+INSERT INTO Employee (Empcode, Empname) VALUES
+('E1', '001Rajkumar'),
+('E2', 'Ramkumar002'),
+('E3', 'Ravikumar003');
+
+SELECT Empcode, TRIM(TRANSLATE(Empname, '0123456789', '')) AS Empname FROM Employee;
+
+CREATE TABLE EmployeeName (
+    F_Name VARCHAR2(20),
+    M_Name VARCHAR2(20),
+    L_Name VARCHAR2(20)
+);
+
+INSERT INTO EmployeeName (F_Name, M_Name, L_Name) VALUES
+('Pankaj', 'Kumar', 'Tiwari'),
+('Ashok', 'Kumar', 'Sharma'),
+('Arun', 'Kumar', 'Sharma');
+
+SELECT SUBSTR(F_Name, 1, 1) || '. ' || SUBSTR(M_Name, 1, 1) || '. ' || L_Name AS Name FROM EmployeeName;
+
+CREATE TABLE StudentMarks (
+    Sname VARCHAR2(20),
+    Marks NUMBER
+);
+
+INSERT INTO StudentMarks (Sname, Marks) VALUES
+('Raj', 65),
+('Amit', 32),
+('Sanjay', 45),
+('Rohit', 40),
+('Anil', 35);
+
+SELECT Sname, 
+    CASE 
+        WHEN Marks >= 35 THEN 'Pass' 
+        ELSE 'Fail' 
+    END AS Result
+FROM StudentMarks;
