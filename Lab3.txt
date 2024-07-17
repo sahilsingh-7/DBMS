@@ -1,0 +1,62 @@
+CREATE TABLE Client_Master (
+    Client_No VARCHAR2(6),
+    Name VARCHAR2(20),
+    City VARCHAR2(15),
+    Pincode NUMBER(6),
+    State VARCHAR2(15),
+    Bal_Due FLOAT(10,2)
+);
+
+CREATE TABLE Product_Master (
+    Product_NO VARCHAR2(6),
+    Description VARCHAR2(15),
+    Profit_Percentage NUMBER(4,2),
+    Unit_Measure VARCHAR2(10),
+    Qty_On_Hand NUMBER(8),
+    Reorder_Lvl NUMBER(8,2),
+    Sell_Price NUMBER(8,2),
+    Cost_Price NUMBER(8,2)
+);
+
+INSERT INTO Client_Master (Client_No, Name, City, Pincode, State, Bal_Due) VALUES 
+('C00001', 'Ivan Bayross', 'Mumbai', 400054, 'Maharashtra', 15000),
+('C00002', 'Mamta Mazumdar', 'Madras', 780001, 'Tamil Nadu', 0),
+('C00003', 'Chhaya Bankar', 'Mumbai', 400057, 'Maharashtra', 5000),
+('C00004', 'Ashwini Joshi', 'Bangalore', 560001, 'Karnataka', 0),
+('C00005', 'Hansel Colaco', 'Mumbai', 400060, 'Maharashtra', 2000),
+('C00006', 'Deepak Sharma', 'Mangalore', 560050, 'Karnataka', 0);
+
+INSERT INTO Product_Master (Product_NO, Description, Profit_Percentage, Unit_Measure, Qty_On_Hand, Reorder_Lvl, Sell_Price, Cost_Price) VALUES
+('P00001', '1.44floppies', 5, 'Piece', 200, 50, 350, 250),
+('P03453', 'Monitors', 6, 'Piece', 150, 50, 500, 350),
+('P06734', 'Mouse', 5, 'Piece', 100, 20, 600, 450),
+('P07865', '1.22floppies', 5, 'Piece', 100, 20, 750, 500),
+('P07868', 'Keyboards', 2, 'Piece', 150, 50, 850, 550),
+('P07885', 'CDDrive', 2.5, 'Piece', 80, 30, 700, 450),
+('P07965', '540 HDD', 4, 'Piece', 100, 40, 350, 250),
+('P07975', '1.44Drive', 5, 'Piece', 70, 30, 300, 175),
+('P08865', '1.22Drive', 5, 'Piece', 75, 30, 450, 300);
+
+SELECT Name FROM Client_Master;
+SELECT Name, City FROM Client_Master;
+SELECT Description FROM Product_Master;
+SELECT * FROM Client_Master WHERE City = 'Bombay';
+SELECT * FROM Client_Master WHERE Client_No IN ('C00001', 'C00002');
+SELECT * FROM Product_Master WHERE Description IN ('1.44 Drive', '1.22 Drive');
+SELECT * FROM Product_Master WHERE Sell_Price > 5000;
+SELECT * FROM Client_Master WHERE City IN ('Bombay', 'Delhi', 'Madras');
+SELECT * FROM Product_Master WHERE Sell_Price > 2000 AND Sell_Price <= 5000;
+SELECT Name, City, State FROM Client_Master WHERE State != 'Maharashtra';
+UPDATE Product_Master SET Sell_Price = 1150 WHERE Description = '1.44floppies';
+DELETE FROM Client_Master WHERE Client_No = 'C00001';
+SELECT Description, Sell_Price, Sell_Price * 15 AS New_Sell_Price FROM Product_Master WHERE Sell_Price > 1500;
+SELECT * FROM Client_Master WHERE City LIKE '_a%';
+SELECT Name FROM Client_Master WHERE Name LIKE '_a%';
+SELECT * FROM Product_Master ORDER BY Description;
+SELECT COUNT(*) FROM Product_Master;
+SELECT AVG(Sell_Price) FROM Product_Master;
+SELECT MIN(Sell_Price) FROM Product_Master;
+SELECT MAX(Sell_Price) AS max_price, MIN(Sell_Price) AS min_price FROM Product_Master;
+SELECT COUNT(*) FROM Product_Master WHERE Sell_Price >= 1500;
+SELECT * FROM Product_Master ORDER BY Sell_Price ASC;
+SELECT * FROM Product_Master ORDER BY Sell_Price DESC;
